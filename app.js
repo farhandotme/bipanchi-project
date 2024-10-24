@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const dotenv = require("dotenv").config({path : "./env"});
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+const conn = require("./db/connectionDb");
+
+conn();
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
@@ -13,10 +17,10 @@ app.get("/", (req, res) => {
 });
 app.get("/register", (req, res) => {
   res.render("register");
-})
+});
 app.get("/login", (req, res) => {
   res.render("login");
-})
+});
 
 const port = process.env.PORT || 4000;
 
