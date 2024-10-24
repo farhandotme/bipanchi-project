@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width== device width, initial-scale=1.0">
+    <meta  http-equiv="X-UA-Compatible" content="ie=edge"> -->
+  <title> Voxel Verse</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
+    rel="stylesheet">
+
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* :root{
+        --navbar height: 59px;
+    } */
+    
+    /* Navigation Bar */
+    
+    #navbar{
+        display: flex;
+        align-items: center;
+        margin-top: -10px;
+    }
+    #navbar::before
+    {
+        content:"";
+        background-color: purple;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        opacity: 0.4;
+    }
+    /* Navigation Bar: Logo and image */
+    #logo{
+        margin: 10px 34px;
+    
+    }
+    #logo img{
+        height: 50px;
+        margin: 1px 3px;
+        border-radius: 50px;
+    }
+    /* Navigation Bar: List styling */
+    #navbar{
+        position: relative;
+    }
+    #navbar ul{
+        display: flex;
+    }
+    
+    #navbar ul li{
+        list-style: none;
+        font-size: 1.3rem;
+    }
+    #navbar ul li a{
+        color: rgb(251, 249, 249);
+        display: block;
+        padding: 3px 24px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-family: "Montserrat", sans-serif;;
+        font-size: 20px;
+    }
+    #navbar ul li a:hover{
+        color: rgb(2, 2, 2);
+        background-color: rgb(255, 255, 255);
+    }
+       
+    /* home section */
+    #home{
+        display: flex;
+        flex-direction: column;
+        padding: 150px 300px;
+        height: 400px;
+        justify-content: center;
+        align-items:center;
+    }
+    #home::before{
+        content:"";
+        background:url('../images/spaa.jpg') no-repeat center center/cover; 
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        opacity: 0.95;
+        
+        
+    }
+    /* utility class */
+    /* voxel verse */
+    #home h1{     
+        color: white;
+        text-align: center;
+        font-family: "Orbitron", sans-serif;
+        padding: 50px;
+        font-size: 100px;
+    }
+    /* unleashed */
+    #home p{
+        color: white;
+        text-align: center;
+        font-size: 3rem;
+        font-family: "Bebas Neue", sans-serif;
+        margin-left: 15px;
+    }
+        
+        
+        
+    /* dpwnload */
+    #home p1{
+        color: white
+        ;
+        text-align: center;
+        font-size: 30px;
+        padding: 20px;
+    }
+    
+    .h-primary{
+        font-size: 2.8rem;
+        padding: 20px;
+    }
+    .h-seconday{
+        font-size: 2.8rem;
+        padding: 20px;
+    }
+    .button-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        gap: 10px; /* Space between buttons */
+        margin-top: 20px; /* Adjust space above the buttons */
+      }
+    
+      .button {
+        padding: 10px 20px;
+        background-color: deeppink;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        
+        
+      }
+    
+      .button:hover {
+        opacity: 0.8;
+      }
+      /* services section */
+      /* utility class */
+    .container {
+        display: flex; /* Use flexbox */
+        align-items: center; /* Center vertically */
+        padding: 20px; /* Add some padding */
+        background-color: #7851A9;
+      }
+      
+      .image-container {
+        flex: 1; /* Take 1 part of the available space */
+        margin-left: -20px;
+      }
+      
+      .text-container {
+        flex: 1; /* Take 1 part of the available space */
+        padding-left: 20px; /* Space between image and text */
+      }
+      
+      .responsive-image {
+        max-width: 90%; /* Ensure the image is responsive */
+        height: auto; /* Maintain aspect ratio */
+      }
+      .text-container h2{
+        font-size: 36px;
+        font-weight: 700;
+        margin: 50px;
+        padding-left: 20px;
+        text-align: left;
+        color: white;
+        
+      }
+     .text-container  p{
+        font-size: 25px;
+        text-align: center;
+        color: white;
+     }
+    /* 3rd slide */
+     .container3 {
+      display: flex;          /* Enable Flexbox */
+      justify-content: space-between; /* Ensures even spacing between items */
+      align-items: center;    /* Center items vertically */
+      padding: 20px;          /* Add padding for spacing */
+      background-color: #7851A9;
+    }
+    
+    .text-container3{
+      flex: 1;                /* Let the text container take up as much space as needed */
+      padding-right: 20px;    /* Space between text and image */
+    }
+    
+    .image-container3 {
+      flex: 1;                /* Let the image container take up as much space as needed */
+    }
+    
+    .responsive-image3 {
+      max-width: 90%;        /* Ensure the image scales responsively */
+      height: auto;           /* Maintain aspect ratio */
+    }
+    .text-container3 h3{
+        font-size: 36px;
+        font-weight: 700;
+        margin: 50px;
+        padding-left: 60px;
+        text-align: left;
+        color: white;
+        
+      }
+     .text-container3  p{
+        font-size: 25px;
+        text-align: center;
+        color: white;
+     }
+     /* }4th slide */
+     .container4 {
+        display: flex; /* Use flexbox */
+        align-items: center; /* Center vertically */
+        padding: 20px; /* Add some padding */
+        background-color: #7851A9;
+      }
+      
+      .image-container4 {
+        flex: 1; /* Take 1 part of the available space */
+        margin-left: -20px;
+      }
+      
+      .text-container4 {
+        flex: 1; /* Take 1 part of the available space */
+        padding-left: 20px; /* Space between image and text */
+      }
+      
+      .responsive-image4 {
+        max-width: 100%; /* Ensure the image is responsive */
+        height: auto; /* Maintain aspect ratio */
+      }
+      .text-container4 h4{
+        font-size: 36px;
+        font-weight: 700;
+        margin: 50px;
+        padding-left: 100px;
+        text-align: left;
+        color: white;
+        
+      }
+     .text-container4  p{
+        font-size: 25px;
+        text-align: center;
+        color: white;
+     }
+     
+    
+    </style>
+</head>
+
+<body>
+  <nav id="navbar">
+    <div id="logo">
+      <img src="../images/logo.jpg" alt="Voxel Verse" id="src">
+    </div>
+    <ul>
+      <!-- <li class="class"><a href="../index/index.html">Home</a></li> -->
+      <li class="class"><a href="#">Characters</a></li>
+      <li class="class"><a href="../login/login.html">Log in</a></li>
+      <li class="class"><a href="../Sign Up/signup.html">Sign up</a></li>
+      <!-- <li class="class"><a href="#">Contact Us</a></li> -->
+    </ul>
+  </nav>
+  <section id="home">
+    <h1 class="h-primary">voxel verse</h1>
+    <p><b>Artspace Unleashed.</b></p>
+    <p>Download, Upload, and Customize Voxel Models</p>
+    <div class="button-container">
+      <a class="button" href="../login/login.html">Log In</a>
+      <a class="button" href="../Sign Up/signup.html">Sign Up</a>
+    </div>
+
+  </section>
+  <!-- 2nd slide -->
+  <div class="container">
+    <div class="image-container">
+      <img src="../images/2nd.jpg" alt="Voxel Art" class="responsive-image">
+    </div>
+    <div class="text-container">
+      <h2>Igniting Creativity with 3D Characters.</h2>
+      <p>
+        Bring your creativity to life with captivating voxel art—easily create, customize,
+        and share unique 3D models for games, animations, and immersive experiences.
+      </p>
+    </div>
+  </div>
+  <!-- 3rd slide -->
+  <div class="container3">
+    <div class="text-container3">
+      <h3>Your Canvas, Your World</h3>
+      <p>Unleash your artistic vision in Voxel Verse. Whether you're crafting stunning landscapes or playful characters,
+        our platform offers the tools to bring your creativity to life. Build block by block, and watch your world
+        take shape. Your journey into 3D voxel art starts here.</p>
+    </div>
+    <div class="image-container3">
+      <img src="../images/3rd slide.jpg" alt="Descriptive Alt Text" class="responsive-image3">
+    </div>
+  </div>
+  <!-- 4th slide -->
+  <div class="container4">
+    <div class="image-container4">
+      <img src="../images/panel4.jpg" alt="Voxel Art" class="responsive-image">
+    </div>
+    <div class="text-container4">
+      <h4>Export for Any Project</h4>
+      <p>
+        Download characters and animations in multiple formats, ready to use in motion graphics, video games,
+        film, or illustration. Whether you just need one animation or a hundred, export optimizations
+        will keep your projects light and efficient.
+      </p>
+    </div>
+
+</body>
+
+</html>
