@@ -10,6 +10,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.render("home");
 });
+app.get("/login", (req, res) => {
+  res.render("login");
+})
 
 const port = process.env.PORT || 4000;
 

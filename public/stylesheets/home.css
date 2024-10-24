@@ -1,0 +1,237 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* :root{
+  --navbar height: 59px;
+} */
+
+/* Navigation Bar */
+
+#navbar {
+  display: flex;
+  align-items: center;
+  margin-top: -10px;
+}
+#navbar::before {
+  content: "";
+  background-color: purple;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.4;
+}
+/* Navigation Bar: Logo and image */
+#logo {
+  margin: 10px 34px;
+}
+#logo img {
+  height: 50px;
+  margin: 1px 3px;
+  border-radius: 50px;
+}
+/* Navigation Bar: List styling */
+#navbar {
+  position: relative;
+}
+#navbar ul {
+  display: flex;
+}
+
+#navbar ul li {
+  list-style: none;
+  font-size: 1.3rem;
+}
+#navbar ul li a {
+  color: rgb(251, 249, 249);
+  display: block;
+  padding: 3px 24px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+}
+#navbar ul li a:hover {
+  color: rgb(2, 2, 2);
+  background-color: rgb(255, 255, 255);
+}
+
+/* home section */
+#home {
+  display: flex;
+  flex-direction: column;
+  padding: 150px 300px;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+}
+#home::before {
+  content: "";
+  background: url("../images/spaa.jpg") no-repeat center center/cover;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.95;
+}
+/* utility class */
+/* voxel verse */
+#home h1 {
+  color: white;
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  padding: 50px;
+  font-size: 100px;
+}
+/* unleashed */
+#home p {
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  font-family: "Bebas Neue", sans-serif;
+  margin-left: 15px;
+}
+
+/* dpwnload */
+#home p1 {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  padding: 20px;
+}
+
+.h-primary {
+  font-size: 2.8rem;
+  padding: 20px;
+}
+.h-seconday {
+  font-size: 2.8rem;
+  padding: 20px;
+}
+.button-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px; /* Adjust space above the buttons */
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: deeppink;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+/* services section */
+/* utility class */
+.container {
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center vertically */
+  padding: 20px; /* Add some padding */
+  background-color: #7851a9;
+}
+
+.image-container {
+  flex: 1; /* Take 1 part of the available space */
+  margin-left: -20px;
+}
+
+.text-container {
+  flex: 1; /* Take 1 part of the available space */
+  padding-left: 20px; /* Space between image and text */
+}
+
+.responsive-image {
+  max-width: 90%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+.text-container h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 50px;
+  padding-left: 20px;
+  text-align: left;
+  color: white;
+}
+.text-container p {
+  font-size: 25px;
+  text-align: center;
+  color: white;
+}
+/* 3rd slide */
+.container3 {
+  display: flex; /* Enable Flexbox */
+  justify-content: space-between; /* Ensures even spacing between items */
+  align-items: center; /* Center items vertically */
+  padding: 20px; /* Add padding for spacing */
+  background-color: #7851a9;
+}
+
+.text-container3 {
+  flex: 1; /* Let the text container take up as much space as needed */
+  padding-right: 20px; /* Space between text and image */
+}
+
+.image-container3 {
+  flex: 1; /* Let the image container take up as much space as needed */
+}
+
+.responsive-image3 {
+  max-width: 90%; /* Ensure the image scales responsively */
+  height: auto; /* Maintain aspect ratio */
+}
+.text-container3 h3 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 50px;
+  padding-left: 60px;
+  text-align: left;
+  color: white;
+}
+.text-container3 p {
+  font-size: 25px;
+  text-align: center;
+  color: white;
+}
+/* }4th slide */
+.container4 {
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center vertically */
+  padding: 20px; /* Add some padding */
+  background-color: #7851a9;
+}
+
+.image-container4 {
+  flex: 1; /* Take 1 part of the available space */
+  margin-left: -20px;
+}
+
+.text-container4 {
+  flex: 1; /* Take 1 part of the available space */
+  padding-left: 20px; /* Space between image and text */
+}
+
+.responsive-image4 {
+  max-width: 100%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+.text-container4 h4 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 50px;
+  padding-left: 100px;
+  text-align: left;
+  color: white;
+}
+.text-container4 p {
+  font-size: 25px;
+  text-align: center;
+  color: white;
+}
