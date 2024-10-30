@@ -19,14 +19,22 @@
             </div>
         <% }) %>
       <% } %>
-      <form action="">
+      <% if(login_error.length > 0){ %>
+        <% login_error.forEach(msg => { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= msg %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% }) %>
+      <% } %>
+      <form action="/login" method="post">
         <h1>LOG IN</h1>
-        <div class="input-box">
-          <input type="text" placeholder="Username" required />
+        <div class="input-box"> 
+          <input type="text" placeholder="Username" name="email" required />
           <i class="bx bxs-user"></i>
         </div>
         <div class="input-box">
-          <input type="password" placeholder="Password" required />
+          <input type="password" placeholder="Password" name="password" required />
           <i class="bx bxs-lock-alt"></i>
         </div>
 
