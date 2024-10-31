@@ -8,6 +8,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const userModel = require("./models/userModel");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
 
 conn();
 
@@ -24,6 +25,7 @@ app.use(
   })
 );
 app.use(flash());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.render("home");
@@ -71,7 +73,7 @@ app.post("/register", async (req, res) => {
 app.get("/login", (req, res) => {
   let success_msg = req.flash("success");
   let login_error = req.flash("login-error");
-  res.render("login", { success_msg , login_error });
+  res.render("login", { success_msg, login_error });
 });
 
 // POST LOGIN
