@@ -8,7 +8,9 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const userModel = require("./models/userModel");
 const bcrypt = require("bcrypt");
+const multer = require("multer");
 const cookieParser = require("cookie-parser");
+const characterModels = require("./models/characterModels");
 
 conn();
 
@@ -27,10 +29,53 @@ app.use(
 app.use(flash());
 app.use(cookieParser());
 
+const storage = multer.memoryStorage(); // Store file in memory (Buffer)
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 100 * 1024 * 1024 }, // Limit file size to 100 MB
+});
+
 app.get("/", (req, res) => {
+  res.render("index");
+});
+
+app.get("/home", (req, res) => {
   res.render("home");
 });
 
+app.get("/inputDetails", (req, res) => {
+  res.render("inputDetails");
+});
+
+app.post("/create", upload.single("videoFile"), async (req, res) => {
+  try {
+    // Get form data and video buffer
+    const { name, link } = req.body;
+    const videoBuffer = req.file ? req.file.buffer : null;
+
+    // Ensure a video file is uploaded
+    if (!videoBuffer) {
+      return res.status(400).send("No video uploaded. Please try again.");
+    }
+
+    // Log the file and its details for debugging
+    console.log("Uploaded File:", req.file);
+
+    // Save video data in MongoDB
+    const newCharacter = new characterModels({
+      name,
+      video: videoBuffer, // Save video as Buffer
+      link,
+    });
+
+    await newCharacter.save();
+    res.send("Video uploaded successfully!");
+  } catch (error) {
+    // Log the error and send response
+    console.error("Error during video upload:", error.message);
+    res.status(500).send("Error uploading video: " + error.message);
+  }
+});
 // GET REGISTER
 app.get("/register", (req, res) => {
   let error_msg = req.flash("error");
@@ -40,10 +85,11 @@ app.get("/register", (req, res) => {
 // POST REGISTER
 app.post("/register", async (req, res) => {
   let { firstname, lastname, email, password, password2 } = req.body;
-  const user = await userModel.findOne({ email });
+  let user = await userModel.findOne({ email });
   if (user) {
     req.flash("error", "Email already exists");
     res.redirect("/register");
+    return;
   }
 
   if (!firstname || !lastname || !email || !password || !password2) {
@@ -89,7 +135,6 @@ app.post("/login", async (req, res) => {
       if (err) throw err;
       if (isMatch) {
         req.session.user = user;
-        req.flash("success", "Login Successful");
         res.redirect("/home");
       } else {
         req.flash("login-error", "Incorrect Password");

@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const { dbname } = require("../contants.js");
 
-
-
 const conn = async () => {
   try {
     const connectdb = await mongoose.connect(
-      `${process.env.MONGO_URI}/${dbname}`
+      `${process.env.MONGO_URI}/${dbname}`,
+      { useNewUrlParser: true, useUnifiedTopology: true }
     );
     console.log(
       "connected to db connecttion Host : ",
