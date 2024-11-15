@@ -41,37 +41,60 @@ app.get("/", (req, res) => {
 
 app.get("/home", async (req, res) => {
   const videos = await characterModels.find();
-  res.render("home", { videos });
+  const characters = await characterModels.find();
+
+  // Convert the image buffer to Base64 string
+  const charactersWithImageBase64 = characters.map((character) => {
+    if (character.image) {
+      character.imageBase64 = character.image.toString("base64");
+    }
+    return character;
+  });
+  res.render("home", { videos, characters: charactersWithImageBase64 });
 });
 
 app.get("/inputDetails", (req, res) => {
   res.render("inputDetails");
 });
 
-app.post("/create", upload.single("videoFile"), async (req, res) => {
-  try {
-    const { name, link } = req.body;
-    const videoBuffer = req.file ? req.file.buffer : null;
+app.post(
+  "/create",
+  upload.fields([
+    { name: "imageFile", maxCount: 1 },
+    { name: "videoFile", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const { name, link } = req.body;
+      const imageBuffer =
+        req.files && req.files.imageFile ? req.files.imageFile[0].buffer : null;
+      const videoBuffer =
+        req.files && req.files.videoFile ? req.files.videoFile[0].buffer : null;
 
-    if (!videoBuffer) {
-      return res.status(400).send("No video uploaded. Please try again.");
+      if (!imageBuffer || !videoBuffer) {
+        return res
+          .status(400)
+          .send("Both image and video are required. Please try again.");
+      }
+
+      // console.log("Uploaded Image:", req.files.imageFile);
+      // console.log("Uploaded Video:", req.files.videoFile);
+
+      const newCharacter = new characterModels({
+        name,
+        image: imageBuffer,
+        video: videoBuffer,
+        link,
+      });
+
+      await newCharacter.save();
+      res.send("Character with image and video uploaded successfully!");
+    } catch (error) {
+      console.error("Error during character upload:", error.message);
+      res.status(500).send("Error uploading character: " + error.message);
     }
-
-    console.log("Uploaded File:", req.file);
-
-    const newCharacter = new characterModels({
-      name,
-      video: videoBuffer,
-      link,
-    });
-
-    await newCharacter.save();
-    res.send("Video uploaded successfully!");
-  } catch (error) {
-    console.error("Error during video upload:", error.message);
-    res.status(500).send("Error uploading video: " + error.message);
   }
-});
+);
 
 app.get("/video/:id", async (req, res) => {
   try {
