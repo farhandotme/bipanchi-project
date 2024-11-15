@@ -29,18 +29,19 @@ app.use(
 app.use(flash());
 app.use(cookieParser());
 
-const storage = multer.memoryStorage(); // Store file in memory (Buffer)
+const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 100 * 1024 * 1024 }, // Limit file size to 100 MB
+  limits: { fileSize: 100 * 1024 * 1024 },
 });
 
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/home", (req, res) => {
-  res.render("home");
+app.get("/home", async (req, res) => {
+  const videos = await characterModels.find();
+  res.render("home", { videos });
 });
 
 app.get("/inputDetails", (req, res) => {
@@ -49,31 +50,35 @@ app.get("/inputDetails", (req, res) => {
 
 app.post("/create", upload.single("videoFile"), async (req, res) => {
   try {
-    // Get form data and video buffer
     const { name, link } = req.body;
     const videoBuffer = req.file ? req.file.buffer : null;
 
-    // Ensure a video file is uploaded
     if (!videoBuffer) {
       return res.status(400).send("No video uploaded. Please try again.");
     }
 
-    // Log the file and its details for debugging
     console.log("Uploaded File:", req.file);
 
-    // Save video data in MongoDB
     const newCharacter = new characterModels({
       name,
-      video: videoBuffer, // Save video as Buffer
+      video: videoBuffer,
       link,
     });
 
     await newCharacter.save();
     res.send("Video uploaded successfully!");
   } catch (error) {
-    // Log the error and send response
     console.error("Error during video upload:", error.message);
     res.status(500).send("Error uploading video: " + error.message);
+  }
+});
+
+app.get("/video/:id", async (req, res) => {
+  try {
+    const video = await characterModels.findById(req.params.id);
+    res.send(video.video);
+  } catch (error) {
+    res.status(500).send("Error streaming video");
   }
 });
 // GET REGISTER

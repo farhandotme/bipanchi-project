@@ -4,70 +4,112 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Voxel Verse - Character Selection</title>
-    <link rel="stylesheet" href="../stylesheets/home.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom animation classes */
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+      }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
+  <body class="bg-gray-100 text-gray-900 min-h-screen relative">
+    <div class="container mx-auto py-12 px-6 lg:px-12">
+      <!-- Logout Button -->
+      <a
+        href="/login"
+        class="absolute top-6 right-6 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-transform"
+      >
+        Logout
+      </a>
 
-  <body>
-    <!-- <header>
-    <h1>Voxel Verse</h1>
-  </header> -->
-    <div class="container">
-      <div class="main-content">
-        <section class="character-list">
+      <!-- Title Section -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800">Voxel Verse</h1>
+        <p class="text-lg text-gray-600 mt-2">
+          Choose your hero and embark on a journey!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Character List Section -->
+        <section
+          class="col-span-1 lg:col-span-1 bg-white p-6 rounded-lg shadow-lg"
+        >
           <input
             type="text"
             placeholder="Search characters..."
-            class="search-bar"
+            class="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300"
           />
-          <div class="character-card-grid">
-            <div class="character-card">
-              <img src="path-to-character1.jpg" alt="Character 1" width="300" />
-              <p>Character 1</p>
+          <div class="character-card-grid grid grid-cols-2 gap-4">
+            <% videos.forEach(video => { %>
+            <div
+              class="character-card group bg-gray-200 rounded-lg p-4 shadow-md hover:bg-gray-300 cursor-pointer transition-transform transform hover:scale-105"
+              onclick="showPreview('<%= video._id %>', '<%= video.link %>')"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1731360433657-bf7be6d169a6?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="<%= video.name %>"
+                class="w-full h-24 object-cover rounded mb-2"
+              />
+              <p class="text-center font-semibold text-gray-800">
+                <%= video.name %>
+              </p>
             </div>
-            <div class="character-card">
-              <img src="path-to-character2.jpg" alt="Character 2" width="300" />
-              <p>Character 2</p>
-            </div>
-            <div class="character-card">
-              <img src="path-to-character3.jpg" alt="Character 3" />
-              <p>Character 3</p>
-            </div>
-            <div class="character-card">
-              <img src="path-to-character4.jpg" alt="Character 4" />
-              <p>Character 4</p>
-            </div>
-            <div class="character-card">
-              <img src="path-to-character5.jpg" alt="Character 5" />
-              <p>Character 5</p>
-            </div>
-            <div class="character-card">
-              <img src="path-to-character6.jpg" alt="Character 6" />
-              <p>Character 6</p>
-            </div>
-            <div class="character-card">
-              <img src="path-to-character7.jpg" alt="Character 7" />
-              <p>Character 7</p>
-            </div>
-            <div class="character-card">
-              <img src="path-to-character7.jpg" alt="Character 8" />
-              <p>Character 8</p>
-            </div>
-            <div class="character-card">
-              <img src="path-to-character7.jpg" alt="Character 9" />
-              <p>Character 9</p>
-            </div>
-            <div class="character-card">
-              <img src="path-to-character7.jpg" alt="Character 10" />
-              <p>Character 10</p>
-            </div>
+            <% }) %>
           </div>
         </section>
-        <section class="character-preview">
-          <h2>Character Preview</h2>
-          <div class="preview-model"></div>
-          <button class="action-btn">Download</button>
+
+        <!-- Character Preview Section -->
+        <section
+          class="col-span-1 lg:col-span-2 bg-white p-8 rounded-lg shadow-lg"
+        >
+          <h2 class="text-2xl font-bold text-center mb-4">Character Preview</h2>
+          <div
+            class="bg-gray-200 rounded-lg overflow-hidden h-[32rem] flex items-center justify-center"
+          >
+            <video
+              id="character-preview-video"
+              controls
+              class="w-full h-full object-cover fade-in"
+              autoplay
+              loop
+              muted
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <button
+            id="download-button"
+            class="mt-6 w-full bg-orange-500 text-white font-semibold py-3 rounded-lg hover:bg-orange-600 hover:scale-105 transform transition-transform duration-300"
+          >
+            Download
+          </button>
         </section>
       </div>
     </div>
+
+    <script>
+      function showPreview(id, downloadLink) {
+        const video = document.getElementById("character-preview-video");
+        const downloadButton = document.getElementById("download-button");
+
+        // Update video source and trigger fade-in animation
+        video.classList.remove("fade-in");
+        void video.offsetWidth; // Trigger reflow to restart the animation
+        video.src = "/video/" + id;
+        video.classList.add("fade-in");
+
+        // Update download button action
+        downloadButton.onclick = function () {
+          window.location.href = downloadLink;
+        };
+      }
+    </script>
   </body>
 </html>
